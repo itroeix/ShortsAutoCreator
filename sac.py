@@ -19,10 +19,10 @@ def checkupdates():
 
     # Get the current version of the application
     try:
-        with open("version.txt", "r") as f:
+        with open("appv", "r") as f:
             current_version = f.read()
     except:
-        with open('version.txt', 'w') as fp:
+        with open('appv', 'w') as fp:
             pass
     try:
 
@@ -37,8 +37,8 @@ def checkupdates():
                 with open("sac.py", "wb") as f:
                     f.write(response.content)
 
-                    # Update the version.txt file
-                with open("version.txt", "w") as f:
+                    # Update the appv file
+                with open("appv", "w") as f:
                     f.write(latest_version)
                 print("Installed successfully")
     except:
@@ -58,12 +58,17 @@ def createupdate():
         with open("sac.py", "wb") as f:
             f.write(response.content)
 
-        # Update the version.txt file
-        with open("version.txt", "w") as f:
+        # Update the appv file
+        with open("appv", "w") as f:
             f.write(latest_version)
     elif autoupdateinput == "N":
-        with open("version.txt", "w") as f:
+        with open("appv", "w") as f:
             f.write("Disabled")
+    else:
+        logging.error('Invalid choice.')
+        os.remove("appv")
+        print("Invalid choice.")
+        exit()
 
 def create1():
         logging.info("Selected option 1")
