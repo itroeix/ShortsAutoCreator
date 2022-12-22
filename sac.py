@@ -4,14 +4,72 @@ from colorama import Fore, Back, Style
 import logging
 
 import argparse
- 
+import requests
+import shutil
+import threading
 
+def checkupdates():
+    print("Checking update...")
+    # Use the GitHub API to get the latest commit on the updates branch
+    response = requests.get("https://api.github.com/repos/itroeix/ShortsAutoCreator/commits")
+    response_commit = response.json()
+    latest_commit = response_commit[0]
+
+    latest_version = latest_commit["sha"]
+
+    # Get the current version of the application
+    try:
+        with open("version.txt", "r") as f:
+            current_version = f.read()
+    except:
+        with open('version.txt', 'w') as fp:
+            pass
+    try:
+
+        if current_version == "Disabled":
+            print("Updates disabled")
+        else:
+            # Compare the current version to the latest version
+            if latest_version != current_version:
+                print("New version, installing...")
+                # Download the latest version of the application
+                response = requests.get("https://raw.githubusercontent.com/itroeix/ShortsAutoCreator/main/sac.py")
+                with open("sac.py", "wb") as f:
+                    f.write(response.content)
+
+                    # Update the version.txt file
+                with open("version.txt", "w") as f:
+                    f.write(latest_version)
+                print("Installed successfully")
+    except:
+        createupdate()
+
+def createupdate():
+    print(Fore.BLUE + "First time configuration"+ Style.RESET_ALL)
+    autoupdateinput = input("Do you want to activate autoupdate? Y/N > ")
+    if autoupdateinput == "Y":
+        print("Activating autoupdate...")
+        response = requests.get("https://api.github.com/repos/itroeix/ShortsAutoCreator/commits")
+        response_commit = response.json()
+        latest_commit = response_commit[0]
+
+        latest_version = latest_commit["sha"]
+        response = requests.get("https://raw.githubusercontent.com/itroeix/ShortsAutoCreator/main/sac.py")
+        with open("sac.py", "wb") as f:
+            f.write(response.content)
+
+        # Update the version.txt file
+        with open("version.txt", "w") as f:
+            f.write(latest_version)
+    elif autoupdateinput == "N":
+        with open("version.txt", "w") as f:
+            f.write("Disabled")
 
 def create1():
         logging.info("Selected option 1")
         print(Fore.BLUE + '( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) Creating video... ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)'+ Style.RESET_ALL)
         try:
-            create = os.system('ffmpeg -i content/background.mp4 -i content/image1.jpg -i content/image2.jpg -i content/image3.jpg -i assets/text.png -i assets/name.png -filter_complex "[0:v]scale=2275:1280[bg];[bg]crop=720:1280:0:0[bg];[bg][1:v] overlay=150:200 [tmp1]; [tmp1][2:v] overlay=300:600 [tmp2]; [tmp2][3:v] overlay=200:900 [tmp2];  [tmp2][4:v] overlay=100:60[tmp2];  [tmp2][5:v] overlay=300:1150" temp/withoutoutro.mp4')
+            create = os.system('ffmpeg.exe -i content/background.mp4 -i content/image1.jpg -i content/image2.jpg -i content/image3.jpg -i assets/text.png -i assets/name.png -filter_complex "[0:v]scale=2275:1280[bg];[bg]crop=720:1280:0:0[bg];[bg][1:v] overlay=150:200 [tmp1]; [tmp1][2:v] overlay=300:600 [tmp2]; [tmp2][3:v] overlay=200:900 [tmp2];  [tmp2][4:v] overlay=100:60[tmp2];  [tmp2][5:v] overlay=300:1150" temp/withoutoutro.mp4')
         except:
             logging.error("Unknown error")
 
@@ -39,7 +97,7 @@ def create2():
         logging.info("Selected option 2")
         print(Fore.BLUE + '( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) Creating video... ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)'+ Style.RESET_ALL)
         try:
-            create = os.system('ffmpeg -i content/background.mp4 -i content/image1.jpg -i content/image2.jpg -i content/image3.jpg -i assets/text.png -i assets/name.png -filter_complex "[0:v]scale=2275:1280[bg];[bg]crop=720:1280:0:0[bg];[bg][1:v] overlay=150:100 [tmp1]; [tmp1][2:v] overlay=300:500 [tmp2]; [tmp2][3:v] overlay=200:800 [tmp2];  [tmp2][4:v] overlay=100:1000[tmp2];  [tmp2][5:v] overlay=300:10 " temp/withoutoutro.mp4')
+            create = os.system('ffmpeg.exe -i content/background.mp4 -i content/image1.jpg -i content/image2.jpg -i content/image3.jpg -i assets/text.png -i assets/name.png -filter_complex "[0:v]scale=2275:1280[bg];[bg]crop=720:1280:0:0[bg];[bg][1:v] overlay=150:100 [tmp1]; [tmp1][2:v] overlay=300:500 [tmp2]; [tmp2][3:v] overlay=200:800 [tmp2];  [tmp2][4:v] overlay=100:1000[tmp2];  [tmp2][5:v] overlay=300:10 " temp/withoutoutro.mp4')
         except:
             logging.error("Unknown error")
         try:
@@ -63,7 +121,7 @@ def create2():
         logging.info("Video created successfully")
 
 def check():
-   print(Fore.GREEN + "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) Folder Check ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)" + Style.RESET_ALL)
+   print(Fore.BLUE + "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) Folder Check ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)" + Style.RESET_ALL)
    if os.path.exists("assets") and os.path.exists("content") and os.path.exists("temp"):
         print("Checking assets folder...")
         if os.path.exists("assets/name.png") and os.path.exists("assets/outro.mp4") and os.path.exists("assets/text.png"):
@@ -111,6 +169,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
  
 if __name__=="__main__":
+    checkupdates()
     check()
     print(Fore.GREEN + "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) ShortsAutoCreator ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)" + Style.RESET_ALL)
     if args.Position:
@@ -140,4 +199,3 @@ if __name__=="__main__":
         else:
             logging.error('Invalid choice.')
             print("Invalid choice.")
-   # test
