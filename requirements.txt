@@ -1,0 +1,4 @@
+moviepy
+colorama
+logging
+argparse
