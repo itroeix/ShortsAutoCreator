@@ -11,7 +11,7 @@ def create1():
         logging.info("Selected option 1")
         print(Fore.BLUE + '( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) Creating video... ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)'+ Style.RESET_ALL)
         try:
-            create = os.system('ffmpeg.exe -i content/background.mp4 -i content/image1.jpg -i content/image2.jpg -i content/image3.jpg -i assets/text.png -i assets/name.png -filter_complex "[0:v]scale=2275:1280[bg];[bg]crop=720:1280:0:0[bg];[bg][1:v] overlay=150:200 [tmp1]; [tmp1][2:v] overlay=300:600 [tmp2]; [tmp2][3:v] overlay=200:900 [tmp2];  [tmp2][4:v] overlay=100:60[tmp2];  [tmp2][5:v] overlay=300:1150" temp/withoutoutro.mp4')
+            create = os.system('ffmpeg -i content/background.mp4 -i content/image1.jpg -i content/image2.jpg -i content/image3.jpg -i assets/text.png -i assets/name.png -filter_complex "[0:v]scale=2275:1280[bg];[bg]crop=720:1280:0:0[bg];[bg][1:v] overlay=150:200 [tmp1]; [tmp1][2:v] overlay=300:600 [tmp2]; [tmp2][3:v] overlay=200:900 [tmp2];  [tmp2][4:v] overlay=100:60[tmp2];  [tmp2][5:v] overlay=300:1150" temp/withoutoutro.mp4')
         except:
             logging.error("Unknown error")
 
@@ -39,7 +39,7 @@ def create2():
         logging.info("Selected option 2")
         print(Fore.BLUE + '( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) Creating video... ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)'+ Style.RESET_ALL)
         try:
-            create = os.system('ffmpeg.exe -i content/background.mp4 -i content/image1.jpg -i content/image2.jpg -i content/image3.jpg -i assets/text.png -i assets/name.png -filter_complex "[0:v]scale=2275:1280[bg];[bg]crop=720:1280:0:0[bg];[bg][1:v] overlay=150:100 [tmp1]; [tmp1][2:v] overlay=300:500 [tmp2]; [tmp2][3:v] overlay=200:800 [tmp2];  [tmp2][4:v] overlay=100:1000[tmp2];  [tmp2][5:v] overlay=300:10 " temp/withoutoutro.mp4')
+            create = os.system('ffmpeg -i content/background.mp4 -i content/image1.jpg -i content/image2.jpg -i content/image3.jpg -i assets/text.png -i assets/name.png -filter_complex "[0:v]scale=2275:1280[bg];[bg]crop=720:1280:0:0[bg];[bg][1:v] overlay=150:100 [tmp1]; [tmp1][2:v] overlay=300:500 [tmp2]; [tmp2][3:v] overlay=200:800 [tmp2];  [tmp2][4:v] overlay=100:1000[tmp2];  [tmp2][5:v] overlay=300:10 " temp/withoutoutro.mp4')
         except:
             logging.error("Unknown error")
         try:
