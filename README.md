@@ -4,6 +4,10 @@ A tool to create short vertical videos of memes automatically
 ## Documentation
 To start using the program first create 3 folders with the names "assets", "content" and "temp".
 
+### Installation
+- First you have to install ffmpeg (https://ffmpeg.org/download.html) 
+- Install these libraries using the command ```pip install -r requirements.txt```
+
 ### Explanation of folders:
 - In the "assets" folder is where the outro, the text and the watermark will be.
 - In the "content" folder is where the background video and 3 images are.
