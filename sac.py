@@ -62,6 +62,33 @@ def create2():
         print(Fore.GREEN + 'Video created successfully!'+ Style.RESET_ALL)
         logging.info("Video created successfully")
 
+def check():
+   print(Fore.GREEN + "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) Folder Check ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)" + Style.RESET_ALL)
+   if os.path.exists("assets") and os.path.exists("content") and os.path.exists("temp"):
+        print("Checking assets folder...")
+        if os.path.exists("assets/name.png") and os.path.exists("assets/outro.mp4") and os.path.exists("assets/text.png"):
+            print("Assets folder is all correct")
+        else:
+            print("Possibly you forgot to put one of these files: name.png outro.mp4 text.png in the assets folder")
+            exit()
+        if os.path.exists("content/image1.jpg") and os.path.exists("content/background.mp4") and os.path.exists("content/image2.jpg") and os.path.exists("content/image3.jpg"):
+            print("Content folder is all correct")
+        else:
+            print("Possibly you forgot to put one of these files: background.mp4 image1.jpg image2.jpg image3.jpg in the content folder")
+            exit()
+        print("All folders are correct!")
+   else:
+        logging.warning("Folders not created!")
+        print(Fore.YELLOW +"Folders not created!" + Style.RESET_ALL)
+        print("Creating folders...")
+        os.mkdir("assets")
+        os.mkdir("content")
+        os.mkdir("temp")
+        logging.info("Created successfully")
+        print("Created successfully")
+        print("Now you need to put the content in those folders, visit the documentation at github.com/itroeix/ShortsAutoCreator")
+        exit()
+
 # Initialize parser
 parser = argparse.ArgumentParser()
  
@@ -84,6 +111,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
  
 if __name__=="__main__":
+    check()
     print(Fore.GREEN + "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) ShortsAutoCreator ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)" + Style.RESET_ALL)
     if args.Position:
         if args.Position == "up":
@@ -112,4 +140,3 @@ if __name__=="__main__":
         else:
             logging.error('Invalid choice.')
             print("Invalid choice.")
-
