@@ -2,7 +2,6 @@
 A tool to create short vertical videos of memes automatically
 
 ## Documentation
-To start using the program first create 3 folders with the names "assets", "content" and "temp".
 
 ### Installation
 - First you have to install ffmpeg (https://ffmpeg.org/download.html) 
