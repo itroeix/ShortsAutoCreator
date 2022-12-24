@@ -33,7 +33,7 @@ def checkupdates():
             if latest_version != current_version:
                 print("New version, installing...")
                 # Download the latest version of the application
-                response = requests.get("https://cdn.githubraw.com/itroeix/ShortsAutoCreator/main/sac.py")
+                response = requests.get("https://githubraw.com/itroeix/ShortsAutoCreator/main/sac.py")
                 with open("sac.py", "wb") as f:
                     f.write(response.content)
 
@@ -54,7 +54,7 @@ def createupdate():
         latest_commit = response_commit[0]
 
         latest_version = latest_commit["sha"]
-        response = requests.get("https://cdn.githubraw.com/itroeix/ShortsAutoCreator/main/sac.py")
+        response = requests.get("https://githubraw.com/itroeix/ShortsAutoCreator/main/sac.py")
         with open("sac.py", "wb") as f:
             f.write(response.content)
 
